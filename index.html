@@ -6,161 +6,149 @@
     <title>السيرة الذاتية | Ali Yahya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        * { box-sizing: border-box; }
+        
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
             color: #fff;
             overflow-x: hidden;
-            background-color: #020408; /* لون داكن جداً لإبراز الأكواد المضيئة */
+            background-color: #03060a; /* لون داكن جداً لزيادة التباين */
         }
 
-        /* لوحة الأكواد المتساقطة */
+        /* لوحة الأكواد المتساقطة الحادة */
         #codeCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -2; /* خلف كل شيء */
+            z-index: -2;
         }
 
-        /* طبقة تعتيم خفيفة جداً فقط لكي لا يضيع النص */
+        /* طبقة حماية للنصوص لتكون مقروءة دائماً */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.15); /* تم تقليل التعتيم لترى الأكواد بوضوح */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
             z-index: -1;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 850px;
             margin: 50px auto;
-            /* شفافية عالية للصندوق الزجاجي */
-            background: rgba(10, 15, 25, 0.2);
-            backdrop-filter: blur(3px); /* تقليل الغبش لكي ترى الأكواد من خلفه */
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(12, 16, 26, 0.4); /* زجاج داكن قليلاً لراحة العين */
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             padding: 50px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-            border: 1px solid rgba(0, 210, 255, 0.25);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border: 1px solid rgba(0, 210, 255, 0.15);
             position: relative;
             z-index: 1;
         }
 
-        /* --- تأثيرات الحركة للمحتوى --- */
+        /* --- الحركات --- */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         header {
             text-align: center;
-            border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
             padding-bottom: 30px;
             margin-bottom: 40px;
             animation: fadeInDown 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
         }
 
         .profile-img {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center 80%;
-            aspect-ratio: 1 / 1;
             display: block;
             margin: 0 auto 15px auto;
             border: 3px solid #00d2ff;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.8),
-                        0 0 40px rgba(0, 210, 255, 0.5),
-                        inset 0 0 10px rgba(0, 210, 255, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+            transition: transform 0.3s ease;
         }
-
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 210, 255, 1);
-        }
+        .profile-img:hover { transform: scale(1.05); }
 
         header h1 {
             margin: 0;
             color: #fff;
-            font-size: 3em;
+            font-size: 2.8em;
             font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.9);
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 1);
         }
 
         .personal-info {
-            font-size: 1.2em;
-            color: #e0e0e0;
-            margin-top: 10px;
-            font-weight: 700;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            font-size: 1.1em;
+            color: #b0c4de;
+            margin-top: 5px;
+            font-weight: 600;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             opacity: 0; 
             animation: fadeInUp 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
         }
-
         .section:nth-of-type(1) { animation-delay: 0.1s; }
         .section:nth-of-type(2) { animation-delay: 0.2s; }
         .section:nth-of-type(3) { animation-delay: 0.3s; }
         .section:nth-of-type(4) { animation-delay: 0.4s; }
         .section:nth-of-type(5) { animation-delay: 0.5s; }
-        .section:nth-of-type(6) { animation-delay: 0.6s; }
 
         .section h2 {
             color: #00d2ff;
-            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            text-shadow: 0 0 8px rgba(0, 210, 255, 0.7);
+            border-bottom: 1px dashed rgba(0, 210, 255, 0.2);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
         .section p {
-            line-height: 1.9;
-            font-size: 1.1em;
-            text-shadow: 1px 1px 4px rgba(0,0,0,1); /* تقوية ظل النص ليكون مقروء فوق الأكواد */
+            line-height: 1.8;
+            font-size: 1.05em;
+            text-shadow: 0 2px 3px rgba(0,0,0,1);
             margin-bottom: 15px;
-            color: #f0f0f0;
-            font-weight: 600;
+            color: #e6edf3;
         }
         .section ul {
             list-style-type: none;
             padding-right: 0;
+            margin: 0;
         }
         .section ul li {
-            line-height: 1.8;
-            font-size: 1.1em;
-            margin-bottom: 10px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            margin-bottom: 8px;
             position: relative;
-            padding-right: 25px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,1);
-            font-weight: 600;
-            transition: transform 0.2s ease, color 0.2s ease;
+            padding-right: 22px;
+            text-shadow: 0 2px 3px rgba(0,0,0,1);
+            color: #e6edf3;
+            transition: transform 0.2s;
         }
-        .section ul li:hover {
-            transform: translateX(-8px);
-            color: #00d2ff;
-        }
+        .section ul li:hover { transform: translateX(-5px); color: #00d2ff; }
         .section ul li::before {
             content: "/>";
             color: #00d2ff;
-            font-size: 1em;
+            font-size: 0.9em;
             font-family: monospace;
             font-weight: bold;
             position: absolute;
@@ -168,6 +156,7 @@
             top: 2px;
         }
 
+        /* --- أزرار التواصل (تصميم الكمبيوتر) --- */
         .social-sidebar {
             position: fixed;
             top: 50%;
@@ -175,7 +164,7 @@
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             z-index: 100;
         }
 
@@ -183,63 +172,79 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: rgba(25, 30, 40, 0.6);
+            background: rgba(15, 20, 30, 0.8);
             color: #fff;
             text-decoration: none;
-            font-size: 1.5em;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-size: 1.3em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
         }
-
-        .social-btn.whatsapp { background: #25D366; border-color: rgba(255, 255, 255, 0.3); }
-        .social-btn.telegram { background: #229ED9; border-color: rgba(255, 255, 255, 0.3); }
-        .social-btn.facebook { background: #1877F2; border-color: rgba(255, 255, 255, 0.3); }
-        .social-btn.instagram { background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); border-color: rgba(255, 255, 255, 0.3); }
+        .social-btn.whatsapp { color: #25D366; }
+        .social-btn.telegram { color: #229ED9; }
+        .social-btn.facebook { color: #1877F2; }
+        .social-btn.instagram { color: #E1306C; }
         
         .social-btn:hover {
-            transform: scale(1.15);
-            filter: brightness(1.2);
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: currentColor;
         }
 
-        /* --- تحسينات الموبايل المتجاوبة --- */
+        /* =========================================
+           ترتيب وتحسين تصميم الموبايل بالكامل
+           ========================================= */
         @media (max-width: 768px) {
             .container {
-                margin: 20px 15px 90px 15px;
-                padding: 28px 18px;
-                background: rgba(10, 15, 25, 0.3); /* شفافية مناسبة للموبايل */
-                backdrop-filter: blur(2px);
-                border-radius: 16px;
+                /* تقليل الحواف الجانبية لزيادة مساحة القراءة */
+                margin: 15px 12px 90px 12px; 
+                padding: 25px 15px;
+                border-radius: 15px;
+                background: rgba(12, 16, 26, 0.6); /* تعتيم أقوى قليلاً للموبايل */
             }
-            .profile-img { width: 120px; height: 120px; }
-            header h1 { font-size: 2.2em; }
-            .section h2 { font-size: 1.4em; }
-            .section p, .section ul li { font-size: 1em; }
+            
+            header { padding-bottom: 20px; margin-bottom: 25px; }
+            .profile-img { width: 110px; height: 110px; border-width: 2px; margin-bottom: 10px; }
+            header h1 { font-size: 2em; }
+            .personal-info { font-size: 0.95em; }
+            
+            .section { margin-bottom: 25px; }
+            .section h2 { font-size: 1.3em; margin-bottom: 10px; }
+            .section p, .section ul li { font-size: 0.95em; line-height: 1.6; }
+
+            /* تحويل أزرار التواصل لشريط سفلي أنيق جداً */
             .social-sidebar {
                 top: auto;
                 bottom: 15px;
                 right: 50%;
                 transform: translateX(50%);
                 flex-direction: row;
-                background: rgba(0, 0, 0, 0.8);
-                padding: 10px 20px;
-                border-radius: 40px;
-                border: 1px solid rgba(255,255,255,0.15);
+                width: calc(100% - 30px);
+                max-width: 350px;
+                background: rgba(10, 15, 22, 0.95);
+                padding: 10px;
+                border-radius: 30px;
+                border: 1px solid rgba(0, 210, 255, 0.2);
+                justify-content: space-evenly;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+                backdrop-filter: blur(10px);
             }
-            .social-btn { width: 45px; height: 45px; font-size: 1.2em; }
+            .social-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2em;
+                background: transparent;
+                border: none;
+            }
+            .social-btn:hover { transform: none; background: rgba(255,255,255,0.05); }
         }
     </style>
 </head>
 <body>
 
-<!-- لوحة الأكواد البرمجية المتفاعلة (Canvas) -->
 <canvas id="codeCanvas"></canvas>
-
-<!-- طبقة التعتيم للحفاظ على وضوح النص -->
 <div class="overlay"></div>
 
 <div class="social-sidebar">
@@ -251,76 +256,61 @@
 
 <div class="container">
     <header>
-        <img src="708194197_17977365027014027_6552740261751684425_n.jpg" alt="Ali Yahya" class="profile-img" width="160" height="160">
+        <img src="708194197_17977365027014027_6552740261751684425_n.jpg" alt="Ali Yahya" class="profile-img">
         <h1>Ali Yahya</h1>
         <div class="personal-info">العمر: 23 | السكن: بغداد</div>
     </header>
 
     <div class="section">
         <h2>من أنا</h2>
-        <p>مرحبًا، أنا علي، مطور تطبيقات ومواقع ويب ومبرمج حلول رقمية، أعمل على تصميم وتطوير الأنظمة الحديثة وإنشاء تطبيقات ومواقع احترافية تجمع بين الأداء العالي، السرعة، الأمان، وسهولة الاستخدام. شغفي بالتقنية والبرمجة دفعني إلى تطوير خبرتي في العديد من المجالات الرقمية، بدءًا من تطوير المواقع والأنظمة، مرورًا ببرمجة البوتات والأدوات الذكية، ووصولًا إلى تقديم حلول متخصصة في إدارة الخدمات الرقمية والتسويق عبر وسائل التواصل الاجتماعي.</p>
+        <p>مرحبًا، أنا علي، مطور تطبيقات ومواقع ويب ومبرمج حلول رقمية، أعمل على تصميم وتطوير الأنظمة الحديثة وإنشاء تطبيقات ومواقع احترافية تجمع بين الأداء العالي، السرعة، الأمان، وسهولة الاستخدام. شغفي بالتقنية والبرمجة دفعني إلى تطوير خبرتي في العديد من المجالات الرقمية.</p>
         <p>أسعى دائمًا إلى تقديم حلول عملية وعصرية تلبي احتياجات الأفراد والشركات وصناع المحتوى، مع التركيز على الجودة، الاستقرار، والتجربة الاحترافية للمستخدم.</p>
     </div>
 
     <div class="section">
         <h2>تطوير المواقع الإلكترونية</h2>
-        <p>أقدم خدمات تصميم وتطوير مواقع ويب احترافية بمختلف أنواعها، مع الاهتمام بأدق التفاصيل التقنية والتصميمية، وتشمل الخدمات:</p>
+        <p>أقدم خدمات تصميم وتطوير مواقع ويب احترافية بمختلف أنواعها، مع الاهتمام بأدق التفاصيل التقنية والتصميمية:</p>
         <ul>
             <li>تصميم مواقع شخصية (Portfolio / CV).</li>
             <li>تصميم مواقع الشركات والمؤسسات.</li>
             <li>إنشاء صفحات هبوط (Landing Pages).</li>
             <li>تطوير لوحات تحكم احترافية.</li>
-            <li>تطوير أنظمة إدارة المحتوى.</li>
-            <li>إنشاء مواقع خدمية وتجارية.</li>
             <li>تحسين سرعة الموقع وأدائه.</li>
             <li>تصميم متجاوب يعمل على جميع الأجهزة.</li>
-            <li>الاهتمام بتجربة المستخدم (UI/UX).</li>
-            <li>كتابة أكواد نظيفة وسهلة التطوير مستقبلًا.</li>
         </ul>
     </div>
 
     <div class="section">
         <h2>تطوير التطبيقات</h2>
-        <p>أعمل على تطوير تطبيقات مخصصة تلبي احتياجات العملاء، مع التركيز على الأداء والاستقرار وسهولة الاستخدام، سواء كانت تطبيقات خدمية أو إدارية أو مخصصة للمشاريع الخاصة. ويشمل ذلك:</p>
+        <p>أعمل على تطوير تطبيقات مخصصة تلبي احتياجات العملاء، مع التركيز على الأداء والاستقرار وسهولة الاستخدام:</p>
         <ul>
-            <li>تصميم واجهات حديثة.</li>
-            <li>تطوير منطق التطبيق.</li>
-            <li>ربط الخدمات الخارجية وواجهات البرمجة (APIs).</li>
-            <li>تحسين الأداء.</li>
-            <li>اختبار التطبيق ومعالجة الأخطاء.</li>
+            <li>تصميم واجهات حديثة (UI/UX).</li>
+            <li>تطوير منطق التطبيق وربط الخدمات الخارجية (APIs).</li>
+            <li>تحسين الأداء واختبار التطبيق لمعالجة الأخطاء.</li>
         </ul>
     </div>
 
     <div class="section">
         <h2>برمجة البوتات والأنظمة الآلية</h2>
-        <p>أقوم بتطوير بوتات وأدوات أتمتة تساعد على تنفيذ المهام المتكررة بكفاءة، بما في ذلك:</p>
+        <p>أقوم بتطوير بوتات وأدوات أتمتة تساعد على تنفيذ المهام المتكررة بكفاءة:</p>
         <ul>
-            <li>بوتات Telegram.</li>
-            <li>أنظمة الرد التلقائي.</li>
-            <li>إدارة الطلبات والمستخدمين.</li>
-            <li>إرسال الإشعارات.</li>
-            <li>التكامل مع واجهات API المختلفة.</li>
+            <li>بوتات Telegram ذكية.</li>
+            <li>أنظمة الرد التلقائي وإدارة الطلبات.</li>
             <li>أدوات لتنظيم سير العمل وأنظمة مخصصة حسب احتياجات المشروع.</li>
         </ul>
     </div>
 
     <div class="section">
         <h2>خدمات التسويق</h2>
-        <p>أقدم حلولًا وخدمات رقمية لدعم الحضور على مختلف منصات التواصل الاجتماعي، بما يتناسب مع احتياجات العملاء، وتشمل إدارة وتهيئة الخدمات المتعلقة بالتفاعل والنمو، مثل:</p>
+        <p>أقدم حلولًا لدعم الحضور على منصات التواصل الاجتماعي، بما يتناسب مع أهداف العملاء:</p>
         <ul>
-            <li>زيادة الوصول إلى المحتوى.</li>
-            <li>خدمات التفاعل المختلفة (الإعجابات، المشاهدات، التعليقات، المشاركات).</li>
-            <li>خدمات المتابعين.</li>
+            <li>زيادة الوصول إلى المحتوى والتفاعل.</li>
+            <li>خدمات المتابعين والإعجابات والمشاهدات.</li>
+            <li>تنظيم الطلبات وإدارتها باحترافية.</li>
         </ul>
-    </div>
-
-    <div class="section">
-        <h2>فلسفة العمل</h2>
-        <p>أؤمن أن أي مشروع ناجح يبدأ بفهم احتياجات العميل قبل كتابة أول سطر من الكود. لذلك أحرص على التخطيط الجيد، واختيار التقنيات المناسبة، وبناء حلول قابلة للتطوير مستقبلًا، مع الاهتمام بالأداء والأمان وسهولة الاستخدام. هدفي ليس فقط تنفيذ المشروع، بل تقديم تجربة احترافية تمنح العميل منتجًا يعتمد عليه لفترة طويلة.</p>
     </div>
 </div>
 
-<!-- سكريبت البرمجة التفاعلية للخلفية -->
 <script>
     const canvas = document.getElementById('codeCanvas');
     const ctx = canvas.getContext('2d');
@@ -328,19 +318,19 @@
     let width, height;
     let codeParticles = [];
     
-    // إحداثيات الماوس أو اللمس (زيادة نطاق التفاعل)
-    let mouse = { x: null, y: null, radius: 150 };
+    // تقليل قطر التفاعل للموبايل ليكون أدق
+    let mouse = { x: null, y: null, radius: window.innerWidth < 768 ? 100 : 150 };
 
-    // الأكواد التي ستتساقط (مزيج من أرقام ثنائية ورموز برمجية)
-    const chars = '01<>/{}[]()=+-*^&%$#@!ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    // رموز برمجية واضحة ومميزة
+    const chars = ['{', '}', '<', '>', '/', '*', '=', ';', '0', '1', '()', '[]'];
 
     function initCanvas() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         codeParticles = [];
         
-        // زيادة كثافة الأكواد لتكون أوضح
-        const numParticles = (width * height) / 6000; 
+        // عدد الأكواد مدروس لكي لا يسبب زحمة
+        const numParticles = (width * height) / 9000; 
         
         for (let i = 0; i < numParticles; i++) {
             codeParticles.push(new CodeParticle());
@@ -351,25 +341,26 @@
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            // تكبير حجم الخط ليكون واضحاً للعين
-            this.size = Math.random() * 16 + 14; 
+            // خط كبير وواضح
+            this.size = Math.random() * 8 + 18; 
             this.baseX = this.x;
-            this.speed = Math.random() * 2.5 + 1;
+            this.speed = Math.random() * 1.5 + 0.5;
             this.char = chars[Math.floor(Math.random() * chars.length)];
-            // زيادة الشفافية الأساسية ليكون الرمز ساطعاً
-            this.opacity = Math.random() * 0.6 + 0.4; 
+            // شفافية عالية ليكون الكود مرئياً بوضوح
+            this.baseOpacity = Math.random() * 0.4 + 0.3;
+            this.opacity = this.baseOpacity;
+            
+            // بعض الأكواد باللون الأبيض المائل للأزرق للتنوع
+            this.isWhite = Math.random() > 0.8;
         }
 
         draw() {
-            // توهج للأكواد المضيئة جداً
-            if(this.opacity > 0.8) {
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#00d2ff';
+            if (this.isWhite) {
+                ctx.fillStyle = `rgba(200, 240, 255, ${this.opacity})`;
             } else {
-                ctx.shadowBlur = 0;
+                ctx.fillStyle = `rgba(0, 180, 255, ${this.opacity})`;
             }
-            
-            ctx.fillStyle = `rgba(0, 210, 255, ${this.opacity})`;
+            // إزالة أي فلاتر ضبابية، الخط العريض يضمن الدقة (Sharpness)
             ctx.font = `bold ${this.size}px monospace`;
             ctx.fillText(this.char, this.x, this.y);
         }
@@ -384,7 +375,6 @@
                 this.char = chars[Math.floor(Math.random() * chars.length)];
             }
 
-            // التفاعل مع الماوس واللمس
             if (mouse.x != null && mouse.y != null) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
@@ -392,15 +382,10 @@
 
                 if (distance < mouse.radius) {
                     const force = (mouse.radius - distance) / mouse.radius;
-                    // تدافع الأكواد بقوة أكبر عند اللمس
-                    const directionX = (dx / distance) * force * 7; 
+                    const directionX = (dx / distance) * force * 5; 
                     
                     this.x -= directionX;
-                    this.opacity = 1; // إضاءة قوية جداً
-                    
-                    if(Math.random() > 0.7) {
-                        this.char = chars[Math.floor(Math.random() * chars.length)];
-                    }
+                    this.opacity = 1; // إضاءة كاملة عند التفاعل
                 } else {
                     this.restore();
                 }
@@ -411,16 +396,18 @@
 
         restore() {
             if (this.x !== this.baseX) {
-                this.x -= (this.x - this.baseX) / 10;
+                this.x -= (this.x - this.baseX) / 8;
             }
-            // العودة لشفافية طبيعية ولكنها تبقى واضحة
-            this.opacity = Math.max(0.4, this.opacity - 0.03); 
+            this.opacity = Math.max(this.baseOpacity, this.opacity - 0.05); 
         }
     }
 
     function animate() {
-        // تأثير الذيل المنسدل (Trail Effect) تم تعديله ليكون أوضح
-        ctx.fillStyle = 'rgba(2, 4, 8, 0.15)'; 
+        // تنظيف الشاشة بالكامل في كل فريم (يمنع الضبابية ويجعل الخطوط حادة جداً)
+        ctx.clearRect(0, 0, width, height);
+        
+        // رسم لون خلفية داكن ثابت
+        ctx.fillStyle = '#03060a'; 
         ctx.fillRect(0, 0, width, height);
         
         codeParticles.forEach(p => {
@@ -444,7 +431,10 @@
     window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
     
-    window.addEventListener('resize', initCanvas);
+    window.addEventListener('resize', () => {
+        mouse.radius = window.innerWidth < 768 ? 100 : 150;
+        initCanvas();
+    });
 
     initCanvas();
     animate();
