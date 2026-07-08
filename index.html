@@ -356,9 +356,13 @@ footer.note{
   .section h2{ font-size:1.18em; }
   .section p, .section ul li{ font-size:.9em; }
 
+  /* -- تم إصلاح التوسيط هنا ليدعم جميع اللغات بامتياز -- */
   .social-sidebar{
-    top:auto; bottom:14px; inset-inline-end:50%;
-    transform:translateX(50%);
+    top:auto; 
+    bottom:14px; 
+    left: 50%;
+    inset-inline-end: auto;
+    transform:translateX(-50%);
     flex-direction:row;
     width:calc(100% - 28px);
     max-width:340px;
@@ -370,7 +374,7 @@ footer.note{
     box-shadow:0 -6px 24px rgba(0,0,0,.5);
     backdrop-filter:blur(10px);
   }
-  html[dir="rtl"] .social-sidebar{ transform:translateX(50%); }
+
   .social-btn{ width:40px; height:40px; font-size:1.1em; background:transparent; border:none; }
   .social-btn:hover{ transform:none; box-shadow:none; background:rgba(255,255,255,.06); }
 }
