@@ -12,8 +12,7 @@
 
 <style>
 /* =========================================================
-   نظام الألوان والخطوط — غيّر هذه المتغيرات لتغيير كل شيء
-   Theme tokens — edit these to restyle the whole page
+   نظام الألوان والخطوط — Theme tokens
 ========================================================= */
 :root{
   --bg:            #15161f;
@@ -73,8 +72,9 @@ html[lang="en"] body{ font-family:var(--font-en); }
 /* ---------- مبدّل اللغة ---------- */
 .lang-switch{
   position:fixed;
-  top:18px; left:50%;
-  transform:translateX(-50%);
+  top:18px; 
+  left:0; right:0; margin:0 auto;
+  width:max-content;
   z-index:200;
   display:flex;
   align-items:center;
@@ -137,6 +137,8 @@ html[lang="en"] body{ font-family:var(--font-en); }
 .tb-dot{ width:11px; height:11px; border-radius:50%; flex:none; }
 .tb-dot.red{background:#ff5f56;} .tb-dot.yellow{background:#ffbd2e;} .tb-dot.green{background:#27c93f;}
 .tb-file{
+  flex: 1; /* تم الإضافة لمنع تداخل الشاشة وتلخبطها */
+  min-width: 0; /* تم الإضافة لضمان عمل ellipsis بشكل صحيح */
   margin-inline-start:10px;
   font-family:var(--font-mono);
   font-size:.78em;
@@ -153,6 +155,7 @@ html[lang="en"] body{ font-family:var(--font-en); }
   color:var(--green);
   display:flex; align-items:center; gap:6px;
   white-space:nowrap;
+  flex:none;
 }
 .tb-status i{ font-size:.5em; }
 
@@ -164,7 +167,6 @@ html[lang="en"] body{ font-family:var(--font-en); }
   align-items:center;
   gap:26px;
   margin-bottom:34px;
-  flex-wrap:wrap;
 }
 .avatar-wrap{ flex:none; position:relative; }
 .avatar-wrap::after{
@@ -184,7 +186,7 @@ html[lang="en"] body{ font-family:var(--font-en); }
   display:block;
   border:3px solid var(--bg-deep);
 }
-.hero-text{ flex:1; min-width:240px; }
+.hero-text{ flex:1; min-width:0; }
 .hero-name{
   font-family:var(--font-mono);
   font-weight:800;
@@ -323,10 +325,12 @@ html[dir="rtl"] .section ul li:hover{ transform:translateX(-4px); }
   border:1px solid var(--border);
   transition:all .25s ease;
 }
-.social-btn.whatsapp{ color:#25D366; }
-.social-btn.telegram{ color:#4faee0; }
-.social-btn.facebook{ color:#5b8def; }
-.social-btn.instagram{ color:#e1699a; }
+/* تم تغيير أسماء الكلاسات لتجاوز حجب الإعلانات (Ad-Blockers) */
+.social-btn.p-wa{ color:#25D366; }
+.social-btn.p-tg{ color:#4faee0; }
+.social-btn.p-fb{ color:#5b8def; }
+.social-btn.p-ig{ color:#e1699a; }
+
 .social-btn:hover{ transform:scale(1.08); border-color:currentColor; box-shadow:0 0 18px currentColor; }
 
 footer.note{
@@ -347,22 +351,29 @@ footer.note{
   .lang-switch{ top:12px; padding:3px; }
   .lang-switch button{ padding:6px 13px; font-size:.72em; }
 
-  .hero{ gap:16px; }
-  .profile-img{ width:82px; height:82px; }
-  .hero-name{ font-size:1.4em; }
-  .hero-tagline{ font-size:.85em; }
+  /* تم حل مشكلة التلخبط هنا وتنسيق الهيدر للموبايل بشكل ممتاز */
+  .hero{ 
+    flex-direction:column; 
+    text-align:center; 
+    gap:16px; 
+  }
+  .hero-text { flex:none; width: 100%; }
+  .avatar-wrap { margin:0 auto; }
+  .profile-img{ width:88px; height:88px; }
+  .hero-name{ font-size:1.5em; }
+  .hero-tagline{ font-size:.9em; }
 
   .code-block{ font-size:.76em; padding:14px 12px; }
   .section h2{ font-size:1.18em; }
   .section p, .section ul li{ font-size:.9em; }
 
-  /* -- تم إصلاح التوسيط هنا ليدعم جميع اللغات بامتياز -- */
+  /* شريط الموبايل السفلي ثابت ومستقر 100% في جميع اللغات */
   .social-sidebar{
     top:auto; 
     bottom:14px; 
-    left: 50%;
+    left:0; right:0; margin:0 auto; /* التوسيط المثالي بدون Transform */
+    transform: none; 
     inset-inline-end: auto;
-    transform:translateX(-50%);
     flex-direction:row;
     width:calc(100% - 28px);
     max-width:340px;
@@ -394,11 +405,12 @@ footer.note{
   <button type="button" data-lang="en">EN</button>
 </div>
 
+<!-- تم تحديث الكلاسات هنا لضمان ظهور أيقونة الفيس بوك وعدم إخفائها -->
 <div class="social-sidebar">
-  <a href="https://wa.me/9647748896882" target="_blank" class="social-btn whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-  <a href="https://t.me/j_47a" target="_blank" class="social-btn telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-  <a href="https://www.instagram.com/j_47n/?utm_source=ig_web_button_share_sheet" target="_blank" class="social-btn instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="https://www.facebook.com/profile.php?id=100000108113014" target="_blank" class="social-btn facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://wa.me/9647748896882" target="_blank" class="social-btn p-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="https://t.me/j_47a" target="_blank" class="social-btn p-tg" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+  <a href="https://www.instagram.com/j_47n/?utm_source=ig_web_button_share_sheet" target="_blank" class="social-btn p-ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="https://www.facebook.com/profile.php?id=100000108113014" target="_blank" class="social-btn p-fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
 </div>
 
 <div class="container">
@@ -558,7 +570,7 @@ document.querySelectorAll('.lang-switch button').forEach(btn=>{
 });
 
 /* =========================================================
-   خلفية الكود المتساقط — نسخة هادئة ومتقنة
+   خلفية الكود المتساقط
 ========================================================= */
 const canvas = document.getElementById('codeCanvas');
 const ctx = canvas.getContext('2d');
