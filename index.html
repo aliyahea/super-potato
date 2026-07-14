@@ -1,665 +1,291 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>Ali Yahya — Developer Profile</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Yahya — المطور والمهندس الرقمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #020617; 
+            --bg-card: rgba(30, 41, 59, 0.4);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-<style>
-/* =========================================================
-   نظام الألوان والخطوط — Theme tokens
-========================================================= */
-:root{
-  --bg:            #15161f;
-  --bg-deep:       #0f1017;
-  --surface:       rgba(40, 42, 58, .46);
-  --surface-solid: #23252f;
-  --border:        rgba(189, 147, 249, .16);
-  --border-strong: rgba(189, 147, 249, .32);
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-  --fg:            #f4f4f2;
-  --muted:         #9aa0b4;
-  --comment:       #6f7593;
+        /* مؤثرات الإضاءة الخلفية */
+        body::before {
+            content: ''; position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vh;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+            z-index: -1; filter: blur(60px);
+        }
+        body::after {
+            content: ''; position: fixed; bottom: -10%; right: -10%; width: 50vw; height: 50vh;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1), transparent 70%);
+            z-index: -1; filter: blur(60px);
+        }
 
-  --pink:          #ff7ac6;
-  --purple:        #bd93f9;
-  --cyan:          #86e6fd;
-  --green:         #6bffb0;
-  --yellow:        #f1fa8c;
-  --orange:        #ffb86c;
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --font-ar:  'IBM Plex Sans Arabic', sans-serif;
-  --font-en:  'IBM Plex Sans', sans-serif;
-  --font-mono:'JetBrains Mono', monospace;
-}
+        /* شريط التنقل */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 0; animation: fadeInDown 1s ease;
+        }
+        .lang-switch { display: flex; gap: 5px; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 30px; border: 1px solid var(--border-glass); }
+        .lang-switch button {
+            background: transparent; color: var(--text-dim); border: none;
+            padding: 6px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .lang-switch button.active { background: var(--text-main); color: var(--bg-main); }
+        
+        .store-btn {
+            background: linear-gradient(90deg, #ec4899, #8b5cf6);
+            color: #fff; text-decoration: none; padding: 10px 24px; border-radius: 30px;
+            font-weight: 700; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: 0.3s;
+        }
+        .store-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6); }
 
-*{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+        /* القسم الرئيسي (الهيرو) */
+        .hero {
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            margin: 60px 0; animation: fadeInUp 1s ease 0.2s both;
+        }
+        .avatar-container { position: relative; margin-bottom: 25px; }
+        .avatar-container::before {
+            content: ''; position: absolute; inset: -4px; border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #8b5cf6, #ff00c8);
+            z-index: -1; animation: spin 3s linear infinite;
+        }
+        .avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--bg-main); object-fit: cover; }
+        
+        .hero h3 { font-size: 1.2rem; color: #00d4ff; margin-bottom: 0px; font-weight: 600; }
+        
+        /* تأثير النيون للاسم */
+        .neon-name {
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 5px 0 10px;
+            color: #ffffff;
+            text-shadow: 
+                0 0 10px rgba(0, 212, 255, 0.8),
+                0 0 20px rgba(0, 212, 255, 0.8),
+                0 0 40px rgba(139, 92, 246, 0.6),
+                0 0 80px rgba(139, 92, 246, 0.6);
+            animation: neon-pulse 1.5s infinite alternate;
+        }
 
-body{
-  margin:0;
-  padding:0;
-  min-height:100vh;
-  color:var(--fg);
-  background:var(--bg);
-  font-family:var(--font-ar);
-  overflow-x:hidden;
-}
-html[lang="en"] body{ font-family:var(--font-en); }
+        /* معلومات العمر والبلد */
+        .user-info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            font-weight: 600;
+        }
 
-/* ---------- خلفية الكود المتساقط ---------- */
-#codeCanvas{
-  position:fixed; inset:0;
-  width:100vw; height:100vh;
-  z-index:-2;
-}
-.vignette{
-  position:fixed; inset:0;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(21,22,31,.15) 0%, rgba(10,11,17,.75) 70%),
-    linear-gradient(to bottom, rgba(10,11,17,.35), rgba(10,11,17,.75));
-  z-index:-1;
-  pointer-events:none;
-}
+        .hero p.tagline { font-size: 1.3rem; color: var(--text-dim); max-width: 700px; font-weight: 400; line-height: 1.6; }
 
-/* ---------- مبدّل اللغة ---------- */
-.lang-switch{
-  position:fixed;
-  top:18px; 
-  left:0; right:0; margin:0 auto;
-  width:max-content;
-  z-index:200;
-  display:flex;
-  align-items:center;
-  gap:2px;
-  background:rgba(15,16,23,.85);
-  border:1px solid var(--border-strong);
-  border-radius:999px;
-  padding:4px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-.lang-switch button{
-  font-family:var(--font-mono);
-  font-size:.78em;
-  font-weight:700;
-  letter-spacing:.03em;
-  padding:7px 16px;
-  border:none;
-  border-radius:999px;
-  background:transparent;
-  color:var(--muted);
-  cursor:pointer;
-  transition:all .25s ease;
-}
-.lang-switch button.active{
-  background:linear-gradient(135deg, var(--purple), var(--pink));
-  color:#15161f;
-}
-.lang-switch button:not(.active):hover{ color:var(--fg); }
+        /* أزرار التطبيقات بألوان تفاعلية */
+        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-links a {
+            width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: var(--bg-card); color: var(--text-main);
+            border: 1px solid var(--border-glass); font-size: 1.5rem; text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px);
+        }
+        
+        /* ألوان تطبيقات محددة عند الـ Hover */
+        .social-links a.wa:hover { background: #25D366; color: #fff; border-color: #25D366; box-shadow: 0 0 20px #25D366, 0 0 40px #25D366; transform: translateY(-8px) scale(1.15); }
+        .social-links a.tg:hover { background: #0088cc; color: #fff; border-color: #0088cc; box-shadow: 0 0 20px #0088cc, 0 0 40px #0088cc; transform: translateY(-8px) scale(1.15); }
+        .social-links a.ig:hover { background: #e1306c; color: #fff; border-color: #e1306c; box-shadow: 0 0 20px #e1306c, 0 0 40px #e1306c; transform: translateY(-8px) scale(1.15); }
+        .social-links a.fb:hover { background: #1877F2; color: #fff; border-color: #1877F2; box-shadow: 0 0 20px #1877F2, 0 0 40px #1877F2; transform: translateY(-8px) scale(1.15); }
 
-/* ---------- الحاوية / نافذة الكود ---------- */
-.container{
-  max-width:880px;
-  margin:96px auto 60px;
-  padding:0 20px;
-  position:relative;
-  z-index:1;
-}
+        /* قسم من أنا */
+        .about-section {
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            padding: 40px; border-radius: 24px; text-align: center; margin-bottom: 80px;
+            backdrop-filter: blur(20px); animation: fadeInUp 1s ease 0.4s both;
+        }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 30px; text-align: center; }
+        .about-section p { font-size: 1.15rem; color: #e2e8f0; max-width: 850px; margin: 0 auto; line-height: 2; }
+        .about-section p strong { color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.4); }
 
-.window{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  box-shadow:0 30px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  overflow:hidden;
-  animation:riseIn .7s cubic-bezier(.22,.9,.3,1) both;
-}
-@keyframes riseIn{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+        /* شبكة الخدمات (ألوان تفاعلية) */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 80px; }
+        .service-card {
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            padding: 35px 25px; border-radius: 24px; backdrop-filter: blur(10px);
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        html[dir="rtl"] .service-card { text-align: right; }
+        html[dir="ltr"] .service-card { text-align: left; }
+        
+        .service-card i {
+            font-size: 2.5rem; margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            transition: 0.4s ease;
+        }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 700; transition: 0.4s ease; }
+        .service-card p { color: var(--text-dim); font-size: 1.05rem; }
 
-.title-bar{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:14px 18px;
-  background:rgba(255,255,255,.03);
-  border-bottom:1px solid var(--border);
-}
-.tb-dot{ width:11px; height:11px; border-radius:50%; flex:none; }
-.tb-dot.red{background:#ff5f56;} .tb-dot.yellow{background:#ffbd2e;} .tb-dot.green{background:#27c93f;}
-.tb-file{
-  flex: 1; /* تم الإضافة لمنع تداخل الشاشة وتلخبطها */
-  min-width: 0; /* تم الإضافة لضمان عمل ellipsis بشكل صحيح */
-  margin-inline-start:10px;
-  font-family:var(--font-mono);
-  font-size:.78em;
-  color:var(--muted);
-  direction:ltr;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.tb-status{
-  margin-inline-start:auto;
-  font-family:var(--font-mono);
-  font-size:.72em;
-  color:var(--green);
-  display:flex; align-items:center; gap:6px;
-  white-space:nowrap;
-  flex:none;
-}
-.tb-status i{ font-size:.5em; }
+        /* ألوان الإضاءة عند التمرير على الكروت */
+        .service-card:hover { transform: translateY(-10px); border-color: var(--card-color); box-shadow: 0 15px 35px var(--card-glow); }
+        .service-card:hover i { background: var(--card-color); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.1); }
+        .service-card:hover h3 { color: var(--card-color); text-shadow: 0 0 15px var(--card-glow); }
 
-.window-body{ padding:36px 34px; }
+        /* زر التواصل السفلي */
+        .footer-cta { text-align: center; padding-bottom: 60px; animation: fadeInUp 1s ease 0.8s both; }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #fff; color: var(--bg-main); padding: 15px 40px;
+            border-radius: 50px; font-size: 1.2rem; font-weight: 800; text-decoration: none;
+            transition: 0.3s; box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .contact-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,255,255,0.6); }
 
-/* ---------- الرأس: بطاقة الهوية كسطر كود ---------- */
-.hero{
-  display:flex;
-  align-items:center;
-  gap:26px;
-  margin-bottom:34px;
-}
-.avatar-wrap{ flex:none; position:relative; }
-.avatar-wrap::after{
-  content:"";
-  position:absolute; inset:-4px;
-  border-radius:50%;
-  background:conic-gradient(from 0deg, var(--pink), var(--purple), var(--cyan), var(--green), var(--pink));
-  z-index:-1;
-  filter:blur(2px);
-  opacity:.85;
-}
-.profile-img{
-  width:104px; height:104px;
-  border-radius:50%;
-  object-fit:cover;
-  object-position:center 80%;
-  display:block;
-  border:3px solid var(--bg-deep);
-}
-.hero-text{ flex:1; min-width:0; }
-.hero-name{
-  font-family:var(--font-mono);
-  font-weight:800;
-  font-size:1.85em;
-  margin:0 0 4px;
-  color:var(--fg);
-  letter-spacing:.2px;
-}
-.hero-name .dim{ color:var(--comment); }
-.hero-tagline{
-  font-size:.98em;
-  color:var(--muted);
-  font-weight:500;
-}
+        /* الحركات */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes neon-pulse {
+            from { text-shadow: 0 0 10px rgba(0,212,255,0.8), 0 0 20px rgba(0,212,255,0.8), 0 0 40px rgba(139,92,246,0.6); }
+            to { text-shadow: 0 0 15px rgba(0,212,255,1), 0 0 30px rgba(0,212,255,1), 0 0 60px rgba(139,92,246,0.9), 0 0 100px rgba(139,92,246,0.8); }
+        }
 
-/* ---------- كتلة الكود التعريفية ---------- */
-.code-block{
-  direction:ltr;
-  text-align:left;
-  font-family:var(--font-mono);
-  font-size:.9em;
-  line-height:1.85;
-  background:rgba(10,11,17,.55);
-  border:1px solid var(--border);
-  border-radius:var(--radius-md);
-  padding:18px 20px;
-  margin-bottom:30px;
-  overflow-x:auto;
-}
-.code-line{ display:flex; gap:1.1em; white-space:pre; }
-.code-line .ln{
-  color:var(--comment);
-  user-select:none;
-  width:1.4em;
-  text-align:right;
-  flex:none;
-}
-.tok-kw{ color:var(--pink); font-weight:600; }
-.tok-var{ color:var(--purple); }
-.tok-key{ color:var(--muted); }
-.tok-str{ color:var(--yellow); }
-.tok-num{ color:var(--orange); }
-.tok-fn{ color:var(--green); }
-.tok-punct{ color:var(--muted); }
-
-/* ---------- الأقسام ---------- */
-.section{
-  margin-bottom:32px;
-  opacity:0;
-  animation:fadeUp .55s cubic-bezier(.22,.9,.3,1) forwards;
-}
-.section:nth-of-type(1){ animation-delay:.08s; }
-.section:nth-of-type(2){ animation-delay:.16s; }
-.section:nth-of-type(3){ animation-delay:.24s; }
-.section:nth-of-type(4){ animation-delay:.32s; }
-.section:nth-of-type(5){ animation-delay:.40s; }
-@keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
-
-.section:last-child{ margin-bottom:0; }
-
-.section-tag{
-  direction:ltr;
-  text-align:left;
-  font-family:var(--font-mono);
-  font-size:.78em;
-  color:var(--comment);
-  margin-bottom:6px;
-}
-html[dir="rtl"] .section-tag{ text-align:right; }
-
-.section h2{
-  margin:0 0 12px;
-  font-size:1.4em;
-  font-weight:700;
-  color:var(--fg);
-  padding-bottom:10px;
-  border-bottom:1px solid var(--border);
-  position:relative;
-}
-.section h2::after{
-  content:"";
-  position:absolute;
-  bottom:-1px;
-  inset-inline-start:0;
-  width:46px; height:1px;
-  background:linear-gradient(90deg, var(--pink), var(--purple));
-}
-
-.section p{
-  line-height:1.85;
-  font-size:1.02em;
-  color:var(--muted);
-  margin:0 0 12px;
-}
-.section ul{ list-style:none; margin:0; padding:0; }
-.section ul li{
-  font-family:var(--font-mono);
-  font-size:.86em;
-  color:var(--fg);
-  line-height:1.9;
-  padding-inline-start:1.6em;
-  position:relative;
-  margin-bottom:8px;
-  transition:color .2s ease, transform .2s ease;
-}
-html[lang="en"] .section ul li{ font-family:var(--font-mono); }
-.section ul li::before{
-  content:"$";
-  position:absolute;
-  inset-inline-start:0;
-  color:var(--green);
-  font-weight:700;
-}
-.section ul li:hover{ color:var(--cyan); transform:translateX(4px); }
-html[dir="rtl"] .section ul li:hover{ transform:translateX(-4px); }
-
-/* ---------- شريط التواصل ---------- */
-.social-sidebar{
-  position:fixed;
-  top:50%;
-  inset-inline-end:22px;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:150;
-}
-.social-btn{
-  display:flex; justify-content:center; align-items:center;
-  width:46px; height:46px;
-  border-radius:50%;
-  background:rgba(20,21,30,.85);
-  color:#fff;
-  text-decoration:none;
-  font-size:1.2em;
-  border:1px solid var(--border);
-  transition:all .25s ease;
-}
-/* تم تغيير أسماء الكلاسات لتجاوز حجب الإعلانات (Ad-Blockers) */
-.social-btn.p-wa{ color:#25D366; }
-.social-btn.p-tg{ color:#4faee0; }
-.social-btn.p-fb{ color:#5b8def; }
-.social-btn.p-ig{ color:#e1699a; }
-
-.social-btn:hover{ transform:scale(1.08); border-color:currentColor; box-shadow:0 0 18px currentColor; }
-
-footer.note{
-  text-align:center;
-  color:var(--comment);
-  font-family:var(--font-mono);
-  font-size:.72em;
-  margin:26px auto 0;
-  max-width:880px;
-  padding:0 20px 20px;
-  direction:ltr;
-}
-
-/* ================= الموبايل ================= */
-@media (max-width:768px){
-  .container{ margin:78px auto 100px; padding:0 12px; }
-  .window-body{ padding:24px 18px; }
-  .lang-switch{ top:12px; padding:3px; }
-  .lang-switch button{ padding:6px 13px; font-size:.72em; }
-
-  /* تم حل مشكلة التلخبط هنا وتنسيق الهيدر للموبايل بشكل ممتاز */
-  .hero{ 
-    flex-direction:column; 
-    text-align:center; 
-    gap:16px; 
-  }
-  .hero-text { flex:none; width: 100%; }
-  .avatar-wrap { margin:0 auto; }
-  .profile-img{ width:88px; height:88px; }
-  .hero-name{ font-size:1.5em; }
-  .hero-tagline{ font-size:.9em; }
-
-  .code-block{ font-size:.76em; padding:14px 12px; }
-  .section h2{ font-size:1.18em; }
-  .section p, .section ul li{ font-size:.9em; }
-
-  /* شريط الموبايل السفلي ثابت ومستقر 100% في جميع اللغات */
-  .social-sidebar{
-    top:auto; 
-    bottom:14px; 
-    left:0; right:0; margin:0 auto; /* التوسيط المثالي بدون Transform */
-    transform: none; 
-    inset-inline-end: auto;
-    flex-direction:row;
-    width:calc(100% - 28px);
-    max-width:340px;
-    background:rgba(12,13,20,.95);
-    padding:9px;
-    border-radius:30px;
-    border:1px solid var(--border-strong);
-    justify-content:space-evenly;
-    box-shadow:0 -6px 24px rgba(0,0,0,.5);
-    backdrop-filter:blur(10px);
-  }
-
-  .social-btn{ width:40px; height:40px; font-size:1.1em; background:transparent; border:none; }
-  .social-btn:hover{ transform:none; box-shadow:none; background:rgba(255,255,255,.06); }
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
-}
-</style>
+        /* شاشات الهاتف */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .neon-name { font-size: 2.8rem; }
+            .hero p.tagline { font-size: 1.1rem; }
+            .about-section { padding: 30px 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<canvas id="codeCanvas"></canvas>
-<div class="vignette"></div>
-
-<div class="lang-switch" role="group" aria-label="Language">
-  <button type="button" data-lang="ar" class="active">AR</button>
-  <button type="button" data-lang="en">EN</button>
-</div>
-
-<!-- تم تحديث الكلاسات هنا لضمان ظهور أيقونة الفيس بوك وعدم إخفائها -->
-<div class="social-sidebar">
-  <a href="https://wa.me/9647748896882" target="_blank" class="social-btn p-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <a href="https://t.me/j_47a" target="_blank" class="social-btn p-tg" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-  <a href="https://www.instagram.com/j_47n/?utm_source=ig_web_button_share_sheet" target="_blank" class="social-btn p-ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-  <a href="https://www.facebook.com/profile.php?id=100000108113014" target="_blank" class="social-btn p-fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-</div>
-
 <div class="container">
-  <div class="window">
+    <!-- الشريط العلوي -->
+    <nav class="navbar">
+        <div class="lang-switch">
+            <button data-lang="ar" class="active">العربية</button>
+            <button data-lang="en">English</button>
+        </div>
+        <a href="store.html" class="store-btn">
+            <i class="fa-solid fa-store"></i> <span data-i18n="store_btn">زيارة متجر الدعم والتسويق</span>
+        </a>
+    </nav>
 
-    <div class="title-bar">
-      <span class="tb-dot red"></span>
-      <span class="tb-dot yellow"></span>
-      <span class="tb-dot green"></span>
-      <span class="tb-file">~/ali-yahya/profile.js</span>
-      <span class="tb-status"><i class="fa-solid fa-circle"></i><span data-i18n="online">متصل</span></span>
+    <!-- القسم الرئيسي -->
+    <div class="hero">
+        <div class="avatar-container">
+            <img src="708194197_17977365027014027_6552740261751684425_n.jpg" alt="Ali Yahya" class="avatar">
+        </div>
+        <h3><span data-i18n="hello">مرحباً، أنا</span></h3>
+        <h1 class="neon-name">Ali Yahya</h1>
+        
+        <!-- العمر والبلد -->
+        <div class="user-info" data-i18n="age_location">العمر 23 عاماً | بغداد، العراق 🇮🇶</div>
+
+        <p class="tagline" data-i18n="tagline">أصنع المستقبل بأسطر برمجية، وأحوّل الأفكار المعقدة إلى تجارب رقمية لا تُنسى.</p>
+        
+        <!-- أزرار التطبيقات التفاعلية -->
+        <div class="social-links">
+            <a href="https://wa.me/9647748896882" class="wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/j_47a" class="tg" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.instagram.com/j_47n/" class="ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100000108113014" class="fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
     </div>
 
-    <div class="window-body">
-
-      <div class="hero">
-        <div class="avatar-wrap">
-          <img src="708194197_17977365027014027_6552740261751684425_n.jpg" alt="Ali Yahya" class="profile-img">
-        </div>
-        <div class="hero-text">
-          <h1 class="hero-name">Ali <span class="dim">Yahya</span></h1>
-          <div class="hero-tagline" data-i18n="tagline">مطوّر ويب وتطبيقات ومبرمج حلول رقمية</div>
-        </div>
-      </div>
-
-      <div class="code-block" aria-hidden="false">
-        <div class="code-line"><span class="ln">1</span><span><span class="tok-kw">const</span> <span class="tok-var">developer</span> <span class="tok-punct">=</span> <span class="tok-punct">{</span></span></div>
-        <div class="code-line"><span class="ln">2</span><span>&nbsp;&nbsp;<span class="tok-key">name</span><span class="tok-punct">:</span> <span class="tok-str">"Ali Yahya"</span><span class="tok-punct">,</span></span></div>
-        <div class="code-line"><span class="ln">3</span><span>&nbsp;&nbsp;<span class="tok-key">role</span><span class="tok-punct">:</span> <span class="tok-str">"<span data-i18n="role_str">مطوّر ويب وتطبيقات</span>"</span><span class="tok-punct">,</span></span></div>
-        <div class="code-line"><span class="ln">4</span><span>&nbsp;&nbsp;<span class="tok-key">age</span><span class="tok-punct">:</span> <span class="tok-num">23</span><span class="tok-punct">,</span></span></div>
-        <div class="code-line"><span class="ln">5</span><span>&nbsp;&nbsp;<span class="tok-key">location</span><span class="tok-punct">:</span> <span class="tok-str">"<span data-i18n="location_str">بغداد، العراق</span>"</span></span></div>
-        <div class="code-line"><span class="ln">6</span><span><span class="tok-punct">}</span><span class="tok-punct">;</span></span></div>
-      </div>
-
-      <section class="section">
-        <div class="section-tag">// about.me</div>
-        <h2 data-i18n="about_title">من أنا</h2>
-        <p data-i18n="about_p1">مرحبًا، أنا علي، مطور تطبيقات ومواقع ويب ومبرمج حلول رقمية، أعمل على تصميم وتطوير الأنظمة الحديثة وإنشاء تطبيقات ومواقع احترافية تجمع بين الأداء العالي، السرعة، الأمان، وسهولة الاستخدام. شغفي بالتقنية والبرمجة دفعني إلى تطوير خبرتي في العديد من المجالات الرقمية.</p>
-        <p data-i18n="about_p2">أسعى دائمًا إلى تقديم حلول عملية وعصرية تلبي احتياجات الأفراد والشركات وصناع المحتوى، مع التركيز على الجودة، الاستقرار، والتجربة الاحترافية للمستخدم.</p>
-      </section>
-
-      <section class="section">
-        <div class="section-tag">// web.dev</div>
-        <h2 data-i18n="web_title">تطوير المواقع الإلكترونية</h2>
-        <p data-i18n="web_intro">أقدم خدمات تصميم وتطوير مواقع ويب احترافية بمختلف أنواعها، مع الاهتمام بأدق التفاصيل التقنية والتصميمية:</p>
-        <ul>
-          <li data-i18n="web_li1">تصميم مواقع شخصية (Portfolio / CV).</li>
-          <li data-i18n="web_li2">تصميم مواقع الشركات والمؤسسات.</li>
-          <li data-i18n="web_li3">إنشاء صفحات هبوط (Landing Pages).</li>
-          <li data-i18n="web_li4">تطوير لوحات تحكم احترافية.</li>
-          <li data-i18n="web_li5">تحسين سرعة الموقع وأدائه.</li>
-          <li data-i18n="web_li6">تصميم متجاوب يعمل على جميع الأجهزة.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <div class="section-tag">// app.dev</div>
-        <h2 data-i18n="app_title">تطوير التطبيقات</h2>
-        <p data-i18n="app_intro">أعمل على تطوير تطبيقات مخصصة تلبي احتياجات العملاء، مع التركيز على الأداء والاستقرار وسهولة الاستخدام:</p>
-        <ul>
-          <li data-i18n="app_li1">تصميم واجهات حديثة (UI/UX).</li>
-          <li data-i18n="app_li2">تطوير منطق التطبيق وربط الخدمات الخارجية (APIs).</li>
-          <li data-i18n="app_li3">تحسين الأداء واختبار التطبيق لمعالجة الأخطاء.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <div class="section-tag">// bots.automation</div>
-        <h2 data-i18n="bots_title">برمجة البوتات والأنظمة الآلية</h2>
-        <p data-i18n="bots_intro">أقوم بتطوير بوتات وأدوات أتمتة تساعد على تنفيذ المهام المتكررة بكفاءة:</p>
-        <ul>
-          <li data-i18n="bots_li1">بوتات Telegram ذكية.</li>
-          <li data-i18n="bots_li2">أنظمة الرد التلقائي وإدارة الطلبات.</li>
-          <li data-i18n="bots_li3">أدوات لتنظيم سير العمل وأنظمة مخصصة حسب احتياجات المشروع.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <div class="section-tag">// marketing.js</div>
-        <h2 data-i18n="mkt_title">خدمات التسويق</h2>
-        <p data-i18n="mkt_intro">أقدم حلولًا لدعم الحضور على منصات التواصل الاجتماعي، بما يتناسب مع أهداف العملاء:</p>
-        <ul>
-          <li data-i18n="mkt_li1">زيادة الوصول إلى المحتوى والتفاعل.</li>
-          <li data-i18n="mkt_li2">خدمات المتابعين والإعجابات والمشاهدات.</li>
-          <li data-i18n="mkt_li3">تنظيم الطلبات وإدارتها باحترافية.</li>
-        </ul>
-      </section>
-
+    <!-- قسم من أنا -->
+    <div class="about-section">
+        <h2 class="section-title" data-i18n="about_title">من أنا؟ 💡</h2>
+        <p id="about-text" data-i18n="about_text">
+            أنا <strong>علي يحيى</strong>، مطور برمجيات ومبتكر حلول رقمية...
+        </p>
     </div>
-  </div>
 
-  <footer class="note">// end of profile.js</footer>
+    <!-- الخدمات -->
+    <h2 class="section-title" data-i18n="services_title">ماذا أقدم لك؟ 🚀</h2>
+    <div class="services-grid">
+        <!-- كرت الويب - لون أزرق سماوي -->
+        <div class="service-card" style="--card-color: #00d4ff; --card-glow: rgba(0, 212, 255, 0.4);">
+            <i class="fa-solid fa-code"></i>
+            <h3 data-i18n="web_title">تطوير الويب المتكامل</h3>
+            <p data-i18n="web_desc">أبني مواقع إلكترونية سريعة كالبرق، متجاوبة مع جميع الشاشات...</p>
+        </div>
+        <!-- كرت التطبيقات - لون بنفسجي -->
+        <div class="service-card" style="--card-color: #a855f7; --card-glow: rgba(168, 85, 247, 0.4);">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <h3 data-i18n="app_title">تطبيقات الهواتف الذكية</h3>
+            <p data-i18n="app_desc">أحوّل فكرتك إلى تطبيق واقعي يعشقه المستخدمون...</p>
+        </div>
+        <!-- كرت البوتات - لون أخضر -->
+        <div class="service-card" style="--card-color: #22c55e; --card-glow: rgba(34, 197, 94, 0.4);">
+            <i class="fa-solid fa-robot"></i>
+            <h3 data-i18n="bots_title">الذكاء والأتمتة (البوتات)</h3>
+            <p data-i18n="bots_desc">وفر وقتك وجهدك! أقوم ببرمجة بوتات تيليجرام وأنظمة رد آلي شديدة الذكاء...</p>
+        </div>
+        <!-- كرت التسويق - لون وردي -->
+        <div class="service-card" style="--card-color: #ec4899; --card-glow: rgba(236, 72, 153, 0.4);">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3 data-i18n="mkt_title">نمو وحضور رقمي قوي</h3>
+            <p data-i18n="mkt_desc">لا يكفي أن تمتلك مشروعاً، بل يجب أن يراه العالم. أقدم استراتيجيات...</p>
+        </div>
+    </div>
+
+    <!-- زر التواصل السفلي -->
+    <div class="footer-cta">
+        <a href="https://t.me/j_47a" class="contact-btn">
+            <i class="fa-regular fa-paper-plane"></i> <span data-i18n="contact_me">تواصل معي الآن</span>
+        </a>
+    </div>
 </div>
 
+<script src="data.js"></script>
 <script>
-/* =========================================================
-   الترجمة — AR / EN
-========================================================= */
-const translations = {
-  online:      { ar:"متصل",  en:"Online" },
-  tagline:     { ar:"مطوّر ويب وتطبيقات ومبرمج حلول رقمية", en:"Web & App Developer · Digital Solutions Builder" },
-  role_str:    { ar:"مطوّر ويب وتطبيقات", en:"Full-Stack Developer" },
-  location_str:{ ar:"بغداد، العراق", en:"Baghdad, Iraq" },
+    function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[key]) el.innerHTML = translations[key][lang];
+        });
 
-  about_title: { ar:"من أنا", en:"About Me" },
-  about_p1: { ar:"مرحبًا، أنا علي، مطور تطبيقات ومواقع ويب ومبرمج حلول رقمية، أعمل على تصميم وتطوير الأنظمة الحديثة وإنشاء تطبيقات ومواقع احترافية تجمع بين الأداء العالي، السرعة، الأمان، وسهولة الاستخدام. شغفي بالتقنية والبرمجة دفعني إلى تطوير خبرتي في العديد من المجالات الرقمية.",
-            en:"Hi, I'm Ali — a web and app developer and digital solutions builder. I design and build modern systems, and create professional apps and websites that combine high performance, speed, security, and ease of use. My passion for technology has pushed me to grow my expertise across many digital fields." },
-  about_p2: { ar:"أسعى دائمًا إلى تقديم حلول عملية وعصرية تلبي احتياجات الأفراد والشركات وصناع المحتوى، مع التركيز على الجودة، الاستقرار، والتجربة الاحترافية للمستخدم.",
-            en:"I always aim to deliver practical, modern solutions that meet the needs of individuals, businesses, and content creators — with a focus on quality, stability, and a professional user experience." },
-
-  web_title: { ar:"تطوير المواقع الإلكترونية", en:"Web Development" },
-  web_intro: { ar:"أقدم خدمات تصميم وتطوير مواقع ويب احترافية بمختلف أنواعها، مع الاهتمام بأدق التفاصيل التقنية والتصميمية:",
-             en:"I offer professional website design and development services of all kinds, with close attention to every technical and design detail:" },
-  web_li1: { ar:"تصميم مواقع شخصية (Portfolio / CV).", en:"Personal portfolio / CV websites." },
-  web_li2: { ar:"تصميم مواقع الشركات والمؤسسات.", en:"Corporate & institutional websites." },
-  web_li3: { ar:"إنشاء صفحات هبوط (Landing Pages).", en:"Landing pages." },
-  web_li4: { ar:"تطوير لوحات تحكم احترافية.", en:"Professional admin dashboards." },
-  web_li5: { ar:"تحسين سرعة الموقع وأدائه.", en:"Site speed & performance optimization." },
-  web_li6: { ar:"تصميم متجاوب يعمل على جميع الأجهزة.", en:"Fully responsive design for all devices." },
-
-  app_title: { ar:"تطوير التطبيقات", en:"App Development" },
-  app_intro: { ar:"أعمل على تطوير تطبيقات مخصصة تلبي احتياجات العملاء، مع التركيز على الأداء والاستقرار وسهولة الاستخدام:",
-             en:"I build custom apps tailored to client needs, focused on performance, stability, and ease of use:" },
-  app_li1: { ar:"تصميم واجهات حديثة (UI/UX).", en:"Modern UI/UX design." },
-  app_li2: { ar:"تطوير منطق التطبيق وربط الخدمات الخارجية (APIs).", en:"App logic development & third-party API integration." },
-  app_li3: { ar:"تحسين الأداء واختبار التطبيق لمعالجة الأخطاء.", en:"Performance tuning & bug testing." },
-
-  bots_title: { ar:"برمجة البوتات والأنظمة الآلية", en:"Bots & Automation" },
-  bots_intro: { ar:"أقوم بتطوير بوتات وأدوات أتمتة تساعد على تنفيذ المهام المتكررة بكفاءة:",
-              en:"I build bots and automation tools that handle repetitive tasks efficiently:" },
-  bots_li1: { ar:"بوتات Telegram ذكية.", en:"Smart Telegram bots." },
-  bots_li2: { ar:"أنظمة الرد التلقائي وإدارة الطلبات.", en:"Auto-reply systems & order management." },
-  bots_li3: { ar:"أدوات لتنظيم سير العمل وأنظمة مخصصة حسب احتياجات المشروع.", en:"Workflow tools & custom systems tailored to each project." },
-
-  mkt_title: { ar:"خدمات التسويق", en:"Marketing Services" },
-  mkt_intro: { ar:"أقدم حلولًا لدعم الحضور على منصات التواصل الاجتماعي، بما يتناسب مع أهداف العملاء:",
-             en:"I provide solutions to boost social media presence, matched to client goals:" },
-  mkt_li1: { ar:"زيادة الوصول إلى المحتوى والتفاعل.", en:"Increased content reach & engagement." },
-  mkt_li2: { ar:"خدمات المتابعين والإعجابات والمشاهدات.", en:"Followers, likes & views services." },
-  mkt_li3: { ar:"تنظيم الطلبات وإدارتها باحترافية.", en:"Professional order handling & management." }
-};
-
-function setLang(lang){
-  document.documentElement.lang = lang;
-  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(translations[key]) el.textContent = translations[key][lang];
-  });
-  document.querySelectorAll('.lang-switch button').forEach(btn=>{
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-  });
-}
-
-document.querySelectorAll('.lang-switch button').forEach(btn=>{
-  btn.addEventListener('click', ()=> setLang(btn.getAttribute('data-lang')));
-});
-
-/* =========================================================
-   خلفية الكود المتساقط
-========================================================= */
-const canvas = document.getElementById('codeCanvas');
-const ctx = canvas.getContext('2d');
-let width, height, particles = [];
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let mouse = { x:null, y:null, radius: window.innerWidth < 768 ? 90 : 140 };
-
-const chars = ['{','}','<','>','/','=',';','(',')','[',']','01','10'];
-const palette = ['#bd93f9','#ff7ac6','#86e6fd','#6bffb0','#6f7593'];
-
-function initCanvas(){
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-  particles = [];
-  const count = Math.floor((width * height) / 16000);
-  for(let i=0; i<count; i++) particles.push(new Particle());
-}
-
-class Particle{
-  constructor(){
-    this.x = Math.random()*width;
-    this.y = Math.random()*height;
-    this.baseX = this.x;
-    this.size = Math.random()*7 + 13;
-    this.speed = Math.random()*0.7 + 0.25;
-    this.char = chars[Math.floor(Math.random()*chars.length)];
-    this.color = palette[Math.floor(Math.random()*palette.length)];
-    this.baseOpacity = Math.random()*0.18 + 0.08;
-    this.opacity = this.baseOpacity;
-  }
-  draw(){
-    ctx.globalAlpha = this.opacity;
-    ctx.fillStyle = this.color;
-    ctx.font = `600 ${this.size}px 'JetBrains Mono', monospace`;
-    ctx.fillText(this.char, this.x, this.y);
-    ctx.globalAlpha = 1;
-  }
-  update(){
-    this.y += this.speed;
-    if(this.y > height){
-      this.y = -this.size;
-      this.x = Math.random()*width;
-      this.baseX = this.x;
-      this.char = chars[Math.floor(Math.random()*chars.length)];
+        document.querySelectorAll('.lang-switch button').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        localStorage.setItem('lang', lang);
     }
-    if(mouse.x != null){
-      const dx = mouse.x - this.x, dy = mouse.y - this.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist < mouse.radius){
-        const force = (mouse.radius - dist) / mouse.radius;
-        this.x -= (dx/dist) * force * 4;
-        this.opacity = Math.min(0.55, this.baseOpacity + force*0.4);
-      } else {
-        this.restore();
-      }
-    } else {
-      this.restore();
-    }
-  }
-  restore(){
-    if(this.x !== this.baseX) this.x -= (this.x - this.baseX)/10;
-    this.opacity = Math.max(this.baseOpacity, this.opacity - 0.02);
-  }
-}
 
-function animate(){
-  ctx.fillStyle = '#0f1017';
-  ctx.fillRect(0,0,width,height);
-  particles.forEach(p=>{ p.update(); p.draw(); });
-  if(!reduceMotion) requestAnimationFrame(animate);
-}
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+    });
 
-window.addEventListener('mousemove', e=>{ mouse.x=e.x; mouse.y=e.y; });
-window.addEventListener('touchmove', e=>{ mouse.x=e.touches[0].clientX; mouse.y=e.touches[0].clientY; });
-window.addEventListener('mouseout', ()=>{ mouse.x=null; mouse.y=null; });
-window.addEventListener('touchend', ()=>{ mouse.x=null; mouse.y=null; });
-window.addEventListener('resize', ()=>{
-  mouse.radius = window.innerWidth < 768 ? 90 : 140;
-  initCanvas();
-});
-
-initCanvas();
-if(reduceMotion){
-  ctx.fillStyle = '#0f1017';
-  ctx.fillRect(0,0,width,height);
-  particles.forEach(p=>p.draw());
-} else {
-  animate();
-}
+    const savedLang = localStorage.getItem('lang') || 'ar';
+    setLang(savedLang);
 </script>
 </body>
 </html>
