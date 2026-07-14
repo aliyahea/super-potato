@@ -65,13 +65,28 @@
             display: flex; flex-direction: column; align-items: center; text-align: center;
             margin: 60px 0; animation: fadeInUp 1s ease 0.2s both;
         }
-        .avatar-container { position: relative; margin-bottom: 25px; }
-        .avatar-container::before {
-            content: ''; position: absolute; inset: -4px; border-radius: 50%;
+
+        /* الحاوية الجديدة للصورة - دائرة مثالية الأطراف تنبض بالألوان */
+        .avatar-container { 
+            position: relative; 
+            margin-bottom: 25px; 
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%;
             background: linear-gradient(45deg, #00d4ff, #8b5cf6, #ff00c8);
-            z-index: -1; animation: spin 3s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: avatar-glow 2s ease-in-out infinite alternate;
         }
-        .avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--bg-main); object-fit: cover; }
+        .avatar { 
+            width: 152px; 
+            height: 152px; 
+            border-radius: 50%; 
+            border: 4px solid var(--bg-main); 
+            object-fit: cover; 
+            z-index: 1;
+        }
         
         .hero h3 { font-size: 1.2rem; color: #00d4ff; margin-bottom: 0px; font-weight: 600; }
         
@@ -129,7 +144,7 @@
         .about-section p { font-size: 1.15rem; color: #e2e8f0; max-width: 850px; margin: 0 auto; line-height: 2; }
         .about-section p strong { color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.4); }
 
-        /* شبكة الخدمات (ألوان تفاعلية) */
+        /* شبكة الخدمات */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 80px; }
         .service-card {
             background: var(--bg-card); border: 1px solid var(--border-glass);
@@ -154,7 +169,7 @@
         .service-card:hover i { background: var(--card-color); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.1); }
         .service-card:hover h3 { color: var(--card-color); text-shadow: 0 0 15px var(--card-glow); }
 
-        /* زر التواصل السفلي */
+        /* زر التواصل السفلي وتأثير الانستجرام */
         .footer-cta { text-align: center; padding-bottom: 60px; animation: fadeInUp 1s ease 0.8s both; }
         .contact-btn {
             display: inline-flex; align-items: center; gap: 10px;
@@ -162,10 +177,19 @@
             border-radius: 50px; font-size: 1.2rem; font-weight: 800; text-decoration: none;
             transition: 0.3s; box-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
-        .contact-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,255,255,0.6); }
+        .contact-btn.instagram-cta:hover { 
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(225, 48, 108, 0.6);
+            border: none;
+            transform: scale(1.05);
+        }
 
         /* الحركات */
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes avatar-glow {
+            0% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.4), 0 0 15px rgba(236, 72, 153, 0.4); }
+            100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.9), 0 0 50px rgba(236, 72, 153, 0.9); }
+        }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes neon-pulse {
@@ -198,9 +222,11 @@
 
     <!-- القسم الرئيسي -->
     <div class="hero">
+        <!-- حاوية الصورة الثابتة التي تنبض إضاءةً فقط -->
         <div class="avatar-container">
             <img src="708194197_17977365027014027_6552740261751684425_n.jpg" alt="Ali Yahya" class="avatar">
         </div>
+        
         <h3><span data-i18n="hello">مرحباً، أنا</span></h3>
         <h1 class="neon-name">Ali Yahya</h1>
         
@@ -229,25 +255,25 @@
     <!-- الخدمات -->
     <h2 class="section-title" data-i18n="services_title">ماذا أقدم لك؟ 🚀</h2>
     <div class="services-grid">
-        <!-- كرت الويب - لون أزرق سماوي -->
+        <!-- كرت الويب -->
         <div class="service-card" style="--card-color: #00d4ff; --card-glow: rgba(0, 212, 255, 0.4);">
             <i class="fa-solid fa-code"></i>
             <h3 data-i18n="web_title">تطوير الويب المتكامل</h3>
             <p data-i18n="web_desc">أبني مواقع إلكترونية سريعة كالبرق، متجاوبة مع جميع الشاشات...</p>
         </div>
-        <!-- كرت التطبيقات - لون بنفسجي -->
+        <!-- كرت التطبيقات -->
         <div class="service-card" style="--card-color: #a855f7; --card-glow: rgba(168, 85, 247, 0.4);">
             <i class="fa-solid fa-mobile-screen-button"></i>
             <h3 data-i18n="app_title">تطبيقات الهواتف الذكية</h3>
             <p data-i18n="app_desc">أحوّل فكرتك إلى تطبيق واقعي يعشقه المستخدمون...</p>
         </div>
-        <!-- كرت البوتات - لون أخضر -->
+        <!-- كرت البوتات -->
         <div class="service-card" style="--card-color: #22c55e; --card-glow: rgba(34, 197, 94, 0.4);">
             <i class="fa-solid fa-robot"></i>
             <h3 data-i18n="bots_title">الذكاء والأتمتة (البوتات)</h3>
             <p data-i18n="bots_desc">وفر وقتك وجهدك! أقوم ببرمجة بوتات تيليجرام وأنظمة رد آلي شديدة الذكاء...</p>
         </div>
-        <!-- كرت التسويق - لون وردي -->
+        <!-- كرت التسويق -->
         <div class="service-card" style="--card-color: #ec4899; --card-glow: rgba(236, 72, 153, 0.4);">
             <i class="fa-solid fa-chart-line"></i>
             <h3 data-i18n="mkt_title">نمو وحضور رقمي قوي</h3>
@@ -255,10 +281,10 @@
         </div>
     </div>
 
-    <!-- زر التواصل السفلي -->
+    <!-- زر التواصل السفلي المحدث (للانستجرام) -->
     <div class="footer-cta">
-        <a href="https://t.me/j_47a" class="contact-btn">
-            <i class="fa-regular fa-paper-plane"></i> <span data-i18n="contact_me">تواصل معي الآن</span>
+        <a href="https://www.instagram.com/j_47n/" target="_blank" class="contact-btn instagram-cta">
+            <i class="fa-brands fa-instagram"></i> <span data-i18n="contact_me">تواصل معي الآن</span>
         </a>
     </div>
 </div>
