@@ -60,16 +60,16 @@ const storePackages = [
     {
         id: "pack_3k", title: { ar: "3,000 متابع", en: "3,000 Followers" }, price: { ar: "5,000 د.ع", en: "5,000 IQD" },
         features: { ar: ["سرعة في التنفيذ", "جودة عالية", "دعم فني مستمر"], en: ["Fast Delivery", "High Quality", "Continuous Support"] },
-        icon: "fa-rocket", color: "from-blue-500 to-cyan-400", glow: "rgba(6, 182, 212, 0.4)"
+        icon: "fa-rocket", color: "from-blue-500 to-cyan-400", glow: "rgba(47, 168, 159, 0.35)"
     },
     {
         id: "pack_6_5k", title: { ar: "6,500 متابع", en: "6,500 Followers" }, price: { ar: "10,000 د.ع", en: "10,000 IQD" },
         features: { ar: ["الأكثر طلباً ومبيعاً", "جودة ممتازة وحسابات مرتبة", "تعويض في حال النقصان"], en: ["Most Popular", "Excellent Quality", "Refill Guarantee"] },
-        icon: "fa-fire", color: "from-pink-500 to-purple-500", glow: "rgba(236, 72, 153, 0.5)", popular: true 
+        icon: "fa-fire", color: "from-pink-500 to-purple-500", glow: "rgba(201, 124, 75, 0.45)", popular: true 
     },
     {
         id: "pack_9_5k", title: { ar: "9,500 متابع", en: "9,500 Followers" }, price: { ar: "15,000 د.ع", en: "15,000 IQD" },
         features: { ar: ["باقة الـ VIP الخاصة", "أولوية في التنفيذ", "ضمان أمان الحساب 100%"], en: ["Special VIP Package", "Priority Delivery", "100% Account Safety"] },
-        icon: "fa-gem", color: "from-amber-400 to-orange-500", glow: "rgba(245, 158, 11, 0.4)"
+        icon: "fa-gem", color: "from-amber-400 to-orange-500", glow: "rgba(176, 141, 87, 0.4)"
     }
 ];
